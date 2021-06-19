@@ -2,19 +2,25 @@ import React from "react";
 
 import "./css/noteStyle.css";
 
-function Note() {
-  return (
-    <div className="box">
-      <div>
-        <h2>this is note title</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
-          consequuntur ut tenetur!
-        </p>
+function Note({ noteList, removeNote }) {
+  return noteList.map((note) => {
+    return (
+      <div className="box" key={note.id}>
+        <div>
+          <h2>{note.title}</h2>
+          <p>{note.content}</p>
+        </div>
+        <button
+          className="del-btn"
+          onClick={() => {
+            removeNote(note.id);
+          }}
+        >
+          Delete
+        </button>
       </div>
-      <button className="del-btn">Delete</button>
-    </div>
-  );
+    );
+  });
 }
 
 export default Note;
