@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import CreateNote from "./components/CreateNote";
@@ -6,6 +6,15 @@ import Note from "./components/Note";
 
 function App() {
   const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const allNotes = JSON.parse(localStorage.getItem("notes"));
+    setNotes(allNotes);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   const addNote = (newNote) => {
     console.log("addNote method invoked with new obj : ", newNote);
